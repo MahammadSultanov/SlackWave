@@ -65,7 +65,7 @@ def get_channels():
     except SlackApiError as e:
         print(f"Error getting channels: {e}")
         return []
-
+    
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -118,14 +118,20 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-@app.route("/")
+@app.route('/')
 def index():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    return render_template('index.html')
+@app.route("/sms-sender", methods=["GET", "POST"])
+def sms_sender():
     if 'username' not in session:
         return redirect(url_for('login'))
     
     if request.method == "GET":
         channels = get_channels()
-        return render_template("index.html", channels=channels)
+        return render_template("sms-sender.html", channels=channels)
 
     # Handle POST request
     try:
