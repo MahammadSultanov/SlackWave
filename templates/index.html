@@ -14,7 +14,7 @@
             <!-- Header -->
             <header class="app-header">
                 <div class="header-left">
-                    <h1><i class="fas fa-paper-plane"></i> Send SMS to Slack</h1>
+                    <h1><i class="fa-brands fa-slack"></i> Slack Wave Services</h1>
                 </div>
                 <div class="header-right">
                     <div class="user-info">
@@ -22,72 +22,33 @@
                     </div>
                     <a href="/login" class="login-btn">
                         <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
                     </a>
                 </div>
             </header>
-
-            <!-- Message Form -->
-            <div class="message-container">
-                <form id="smsForm" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="channels">Select Channels</label>
-                        <div class="channels-header">
-                            <div class="select-all-wrapper">
-                                <input type="checkbox" id="selectAll" class="channel-checkbox">
-                                <label for="selectAll">Select All Channels</label>
-                            </div>
-                        </div>
-                        <div id="channels" class="channels-grid">
-                            {% for channel in channels %}
-                            <div class="channel-item">
-                                <input type="checkbox" name="channels" value="{{ channel.id }}" id="channel-{{ channel.id }}" class="channel-checkbox">
-                                <label for="channel-{{ channel.id }}">
-                                    <i class="fas fa-hashtag"></i>
-                                    {{ channel.name }}
-                                </label>
-                            </div>
-                            {% endfor %}
-                        </div>
+            
+            <!-- Split Screen Layout -->
+            <div class="split-container">
+                <div class="split-side sms-side">
+                    <div class="side-content">
+                        <h2>SMS Sender</h2>
+                        <p>Send SMS messages to your Slack workspace</p>
+                        <a href="/sms-sender" class="split-button">
+                            <i class="fas fa-paper-plane"></i> Send SMS
+                        </a>
                     </div>
-
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <div class="message-input-container">
-                            <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
-                            <div class="message-controls">
-                                <span class="character-counter">0/160 characters</span>
-                            </div>
-                        </div>
+                </div>
+                <div class="split-side invite-side">
+                    <div class="side-content">
+                        <h2>User Inviter</h2>
+                        <p>Send invitations to join your Slack workspace</p>
+                        <a href="/user-invite" class="split-button">
+                            <i class="fas fa-envelope"></i> Send Invite
+                        </a>
                     </div>
-
-                    <div class="form-group">
-                        <div class="file-upload-area">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Drag and drop files here or</p>
-                            <button type="button" class="upload-btn">
-                                <i class="fas fa-paperclip"></i> Attach File
-                            </button>
-                            <input type="file" id="fileInput" name="photo" hidden>
-                        </div>
-                    </div>
-
-                    <div class="button-group">
-                        <button type="submit" class="send-btn">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                        <button type="reset" class="reset-btn">
-                            <i class="fas fa-undo"></i> Reset
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
-
-            <!-- Notification Center -->
-            <div class="notification-center"></div>
         </div>
     </div>
-
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
