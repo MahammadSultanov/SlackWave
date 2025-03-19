@@ -2,17 +2,7 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 import os
 import pandas as pd
-
-def get_user_data(username):
-    try:
-        df = pd.read_csv('users.csv')
-        user = df[df['username'] == username].to_dict('records')
-        if user:
-            return user[0]
-        return None
-    except Exception as e:
-        print(f"Error reading user data: {e}")
-        return None
+from utils.auth import get_user_data
 
 def get_slack_client(session):
     if 'username' in session:
