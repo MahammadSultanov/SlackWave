@@ -7,6 +7,8 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+app.permanent_session_lifetime = timedelta(minutes=10)
+
 #Registering the blueprints
 app.register_blueprint(slack_bp)
 app.register_blueprint(auth_bp)
