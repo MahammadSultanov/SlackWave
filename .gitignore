@@ -2,3 +2,4 @@
 /.venv
 users.csv
 /venv
+/__pycache__

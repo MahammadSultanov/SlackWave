@@ -190,7 +190,7 @@
                 <button type="submit" class="auth-btn">Create Account</button>
             </form>
             <div class="auth-links">
-                <p>Already have an account? <a href="/login">Sign in</a></p>
+                <p>Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
             </div>
         </div>
     </div>
@@ -210,7 +210,7 @@
             }
             
             try {
-                const response = await fetch('/signup', {
+                const response = await fetch('{{ url_for("auth.signup") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -225,7 +225,7 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    window.location.href = '/';
+                    window.location.href = '{{ url_for("slack.index") }}';
                 } else {
                     errorMessage.textContent = data.message;
                     errorMessage.style.display = 'block';

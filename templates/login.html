@@ -137,7 +137,7 @@
                 <button type="submit" class="auth-btn">Sign In</button>
             </form>
             <div class="auth-links">
-                <p>New to Slack Wave? <a href="/signup">Create an account</a></p>
+                <p>New to Slack Wave? <a href="{{ url_for('auth.signup') }}">Create an account</a></p>
             </div>
         </div>
     </div>
@@ -148,7 +148,7 @@
             const errorMessage = document.getElementById('errorMessage');
             
             try {
-                const response = await fetch('/login', {
+                const response = await fetch('{{ url_for("auth.login") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -162,7 +162,7 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    window.location.href = '/';
+                    window.location.href = '{{ url_for("slack.index") }}';
                 } else {
                     errorMessage.textContent = data.message;
                     errorMessage.style.display = 'block';

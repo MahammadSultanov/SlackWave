@@ -20,16 +20,15 @@
                     <div class="user-info">
                         <span class="user-name">{{ username }}</span>
                     </div>
-                    <a href="/login" class="login-btn">
+                    <a href="{{ url_for('auth.logout') }}" class="login-btn">
                         <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
                     </a>
                 </div>
             </header>
 
             <!-- Message Form -->
             <div class="message-container">
-                <form id="smsForm" method="POST" enctype="multipart/form-data">
+                <form id="smsForm" method="POST" action="{{ url_for('slack.sms_sender') }}" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="channels">Select Channels</label>
                         <div class="channels-header">
@@ -66,7 +65,7 @@
                             <i class="fas fa-cloud-upload-alt"></i>
                             <p>Drag and drop files here or</p>
                             <button type="button" class="upload-btn">
-                                <i class="fas fa-paperclip"></i> Attach File
+                            <i></i> Attach File
                             </button>
                             <input type="file" id="fileInput" name="photo" hidden>
                         </div>

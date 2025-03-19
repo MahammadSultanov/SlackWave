@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slack Workspace Invitation</title>
+    <style>
+        body {
+            font-family: 'Lato', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1d1c1d;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1264a3;
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .logo img {
+            height: 60px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            margin-top: 5px;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+        .checkbox-label input {
+            width: auto;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #007a5a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #006c50;
+        }
+        .alert {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .alert-success {
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+        }
+        .alert-danger {
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            {% if workspace_logo %}
+                <img src="{{ workspace_logo }}" alt="Workspace Logo">
+            {% else %}
+                <img src="https://a.slack-edge.com/80588/marketing/img/meta/slack_hash_128.png" alt="Slack Logo">
+            {% endif %}
+        </div>
+        
+        <h1>Join our Slack Workspace</h1>
+        
+        <div class="alert alert-success" id="successAlert">
+            Invitation sent successfully! Check your email for instructions.
+        </div>
+        
+        <div class="alert alert-danger" id="errorAlert"></div>
+        
+        <form id="inviteForm" method="post" action="{{ url_for('slack.send_invitation') }}">
+            
+            <div class="form-group">
+                <label for="email">Email Address*</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fullName">Full Name*</label>
+                <input type="text" id="fullName" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="title">Job Title</label>
+                <input type="text" id="title" name="title">
+            </div>
+            
+            {% if channels %}
+            <div class="form-group">
+                <label>Add to Channels:</label>
+                <div class="checkbox-group">
+                    {% for channel in channels %}
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="channels" value="{{ channel.id }}">
+                        #{{ channel.name }} {% if channel.is_private %}(private){% endif %}
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="form-group">
+                <label for="message">Personal Welcome Message (optional)</label>
+                <input type="text" id="message" name="message" placeholder="Welcome to the team!">
+            </div>
+            
+            <button type="submit" id="submitBtn">Send Invitation</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('inviteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            
+            // Hide any existing alerts
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+            
+            // Change button state
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Sending...';
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Send AJAX request
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Send Invitation';
+                
+                if (data.success) {
+                    successAlert.style.display = 'block';
+                    document.getElementById('inviteForm').reset();
+                } else {
+                    errorAlert.textContent = data.error || 'An error occurred while sending the invitation.';
+                    errorAlert.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Send Invitation';
+                errorAlert.textContent = 'An error occurred while sending the invitation.';
+                errorAlert.style.display = 'block';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

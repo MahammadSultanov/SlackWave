@@ -20,7 +20,7 @@
                     <div class="user-info">
                         <span class="user-name">{{ username }}</span>
                     </div>
-                    <a href="/login" class="login-btn">
+                    <a href="{{ url_for('auth.logout') }}" class="login-btn">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </div>
@@ -32,7 +32,7 @@
                     <div class="side-content">
                         <h2>SMS Sender</h2>
                         <p>Send SMS messages to your Slack workspace</p>
-                        <a href="/sms-sender" class="split-button">
+                        <a href="{{ url_for('slack.sms_sender') }}" class="split-button">
                             <i class="fas fa-paper-plane"></i> Send SMS
                         </a>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="side-content">
                         <h2>User Inviter</h2>
                         <p>Send invitations to join your Slack workspace</p>
-                        <a href="/user-invite" class="split-button">
+                        <a href="{{ url_for('slack.user_invite') }}" class="split-button">
                             <i class="fas fa-envelope"></i> Send Invite
                         </a>
                     </div>
