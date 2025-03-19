@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
         try {
-            const response = await fetch('/send_message', {
+            const response = await fetch('/sms-sender', {
                 method: 'POST',
                 body: formData
             });
