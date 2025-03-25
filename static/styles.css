@@ -46,8 +46,14 @@ body {
     background: var(--primary-color);
     color: white;
 }
-
 .header-left h1 {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-mid h1 {
     font-size: 24px;
     display: flex;
     align-items: center;
@@ -65,7 +71,45 @@ body {
     align-items: center;
     gap: 10px;
 }
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--primary-color),var(--secondary-color));
+    color: #ffffff; /* White text */
+    border-radius: 6px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth hover effect */
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    gap: 8px;
+}
 
+.user-info:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); /* Reverse gradient */
+}
+
+.user-info span { /* For the username or text */
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+.back-btn{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background:#771779;
+    color: #ffffff;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+.back-btn:hover {
+    background: #611f69;
+}
 .login-btn {
     display: flex;
     align-items: center;
@@ -454,29 +498,4 @@ textarea:focus {
     .side-content h2 {
         font-size: 2rem;
     }
-}
-.user-info {
-    display: flex;
-    align-items: center;
-    padding: 8px 16px;
-    background: linear-gradient(135deg, var(--primary-color),var(--secondary-color));
-    color: #ffffff; /* White text */
-    border-radius: 6px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: all 0.3s ease; /* Smooth hover effect */
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    gap: 8px;
-}
-
-.user-info:hover {
-    transform: translateY(-2px); /* Slight lift on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); /* Reverse gradient */
-}
-
-.user-info span { /* For the username or text */
-    text-transform: capitalize;
-    letter-spacing: 0.5px;
 }
