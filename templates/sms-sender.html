@@ -33,7 +33,7 @@
 
             <!-- Message Form -->
             <div class="message-container">
-                <form id="smsForm" method="POST" action="{{ url_for('slack.sms_sender') }}" enctype="multipart/form-data">
+                <form class="form-sms-sender" id="smsForm" method="POST" action="{{ url_for('slack.sms_sender') }}" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="channels">Select Channels</label>
                         <div class="channels-header">
