@@ -499,3 +499,8 @@ textarea:focus {
         font-size: 2rem;
     }
 }
+
+/* User Invite Styles */
+.user-container {
+    padding: 30px;
+}
