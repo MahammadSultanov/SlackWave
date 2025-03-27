@@ -25,6 +25,7 @@ def user_invite():
     client = get_slack_client(session)
     if request.method == "GET":
         channels = get_channels(client)
+        response = client.conversations_list(types="private_channel,public_channel")
         return render_template("user-invite.html", channels=channels, username=username)
 
     email = request.form.get("email")
@@ -70,10 +71,34 @@ def sms_sender():
     username = session.get('username', '')
     client = get_slack_client(session)
     
+    if not client:
+        return redirect(url_for('auth.login'))
+    
     if request.method == "GET":
-        channels = get_channels(client)
-        return render_template("sms-sender.html", channels=channels, username=username)
+        try:
+            # Get private and public channels
+            private_response = client.conversations_list(types="private_channel")
+            public_response = client.conversations_list(types="public_channel")
+    
+            # Extract the channels from the response
+            private_channels = private_response.get("channels", [])
+            public_channels = public_response.get("channels", [])
+            
+            # Create a set of private channel IDs for quick lookup
+            private_channel_ids = {channel['id'] for channel in private_channels}
+            
+            # Combine channels and mark if they're private
+            all_channels = []
+            for channel in private_channels + public_channels:
+                channel['is_private'] = channel['id'] in private_channel_ids
+                all_channels.append(channel)
+                
+            return render_template("sms-sender.html", channels=all_channels, username=username)
+        except SlackApiError as e:
+            all_channels = []
+            return render_template("sms-sender.html", channels=all_channels, username=username)
 
+    # Handle the POST request
     selected_channels = request.form.getlist("channels")
     message = request.form.get("message")
     image = request.files.get("photo")
