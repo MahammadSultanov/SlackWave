@@ -47,7 +47,11 @@
                             <div class="channel-item">
                                 <input type="checkbox" name="channels" value="{{ channel.id }}" id="channel-{{ channel.id }}" class="channel-checkbox">
                                 <label for="channel-{{ channel.id }}">
+                                    {% if channel.is_private %}
+                                    <i class="fas fa-lock"></i>
+                                    {% else %}
                                     <i class="fas fa-hashtag"></i>
+                                    {% endif %}
                                     {{ channel.name }}
                                 </label>
                             </div>
