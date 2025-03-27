@@ -35,7 +35,12 @@ body {
     background: var(--bg-color);
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+}
+.main-content-user {
+    background: var(--bg-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 100%;
 }
 
 .app-header {
@@ -502,5 +507,13 @@ textarea:focus {
 
 /* User Invite Styles */
 .user-container {
-    padding: 30px;
+    padding: 60px;
+}
+.form-user-emails {
+    border: 1px solid red;
+}
+.form-sms-sender {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
