@@ -20,10 +20,12 @@ def user_invite():
     if 'username' not in session:
         return redirect(url_for('auth.login'))
     
+    username = session.get('username', '')
+
     client = get_slack_client(session)
     if request.method == "GET":
         channels = get_channels(client)
-        return render_template("user-invite.html", channels=channels)
+        return render_template("user-invite.html", channels=channels, username=username)
 
     email = request.form.get("email")
     full_name = request.form.get("full_name")

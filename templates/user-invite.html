@@ -13,18 +13,17 @@
         <div class="main-content">
             <!-- Header -->
             <header class="app-header">
-                <div>
+                <div class="header-left">
                     <a href="{{ url_for('slack.index') }}" class="back-btn">
                         <i class="fa-solid fa-arrow-left"></i>
                     </a>
                 </div>
-                <div class="header-left">
+                <div class="header-mid">
                     <h1><i class="fas fa-envelope"></i> Send Invite to User</h1>
                 </div>
                 <div class="header-right">
                     <div class="user-info">
-                        <span class="user-name">{{username}}</span>
-                        <span class="user-name">{{ username if username is defined else session.get('username', 'Guest') }}</span>
+                        <span class="user-name">{{ username }}</span>
                     </div>
                     <a href="{{ url_for('auth.logout') }}" class="login-btn">
                         <i class="fas fa-sign-out-alt"></i>
