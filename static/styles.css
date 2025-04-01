@@ -279,8 +279,8 @@ textarea:focus {
     gap: 16px;
     margin-top: 24px;
 }
-
-.send-btn, .reset-btn {
+/* Send Button Styles */
+.send-btn, .reset-btn, .add-btn, .invite-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -292,17 +292,17 @@ textarea:focus {
     transition: all 0.3s;
 }
 
-.send-btn {
+.send-btn, .add-btn, .invite-btn {
     background: var(--primary-color);
     color: white;
 }
 
-.send-btn:hover {
+.send-btn:hover, .add-btn:hover, .invite-btn:hover {
     background: var(--twitch);
     transform: translateY(-2px);
 }
 
-.send-btn:disabled {
+.send-btn:disabled, .add-btn:disabled, .invite-btn:disabled {
     background: #ccc;
     cursor: not-allowed;
     transform: none;
@@ -509,7 +509,7 @@ textarea:focus {
 .user-container {
     padding: 60px;
 }
-.form-user-emails {
+.form-user-emails:disabled{
     border: 1px solid red;
 }
 .form-sms-sender {

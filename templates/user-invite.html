@@ -10,7 +10,7 @@
 <body>
     <div class="app-container">
         <!-- Main Content -->
-        <div class="main-content">
+        <div class="main-content-user">
             <!-- Header -->
             <header class="app-header">
                 <div class="header-left">
@@ -30,24 +30,49 @@
                     </a>
                 </div>
             </header>
-
-            <!-- Message Form -->
-            <div class="message-container">
-                text
-                <hr>
-                text
-                <hr>
-                text
-                <hr>
-                text
-                <hr>
-                text
-                <hr>
-                text
-                <hr>
-                text
-
-            </div>
+            <!-- Add People to Channel Form -->
+            <form class="form-user-emails" id="addToChannelForm" method="POST" action="{{ url_for('slack.add_to_channel') }}">
+                <div class="user-container">
+                    <div class="form-group">
+                        <label for="channelEmail">Add people to channel</label>
+                        <div class="message-input-container">
+                            <textarea id="channelEmail" name="email" required placeholder="Enter email address..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="channelsToAdd">Select Channels</label>
+                        <div class="channels-header">
+                            <div class="select-all-wrapper">
+                                <input type="checkbox" id="selectAllChannels" class="channel-checkbox">
+                                <label for="selectAllChannels">Select All Channels</label>
+                            </div>
+                        </div>
+                        <div id="channelsToAdd" class="channels-grid">
+                            {% for channel in channels %}
+                            <div class="channel-item">
+                                <input type="checkbox" name="channels" value="{{ channel.id }}" id="add-channel-{{ channel.id }}" class="channel-checkbox">
+                                <label for="add-channel-{{ channel.id }}">
+                                    {% if channel.is_private %}
+                                    <i class="fas fa-lock"></i>
+                                    {% else %}
+                                    <i class="fas fa-hashtag"></i>
+                                    {% endif %}
+                                    {{ channel.name }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="add-btn">
+                            <i class="fas fa-user-plus"></i> Add People
+                        </button>
+                        <button type="reset" class="reset-btn">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </form>
 
             <!-- Notification Center -->
             <div class="notification-center"></div>
@@ -55,5 +80,24 @@
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all functionality for workspace invites
+            document.getElementById('selectAll').addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('#channels .channel-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+            
+            // Select all functionality for adding to channels
+            document.getElementById('selectAllChannels').addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('#channelsToAdd .channel-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
