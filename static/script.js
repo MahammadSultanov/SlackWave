@@ -132,10 +132,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Character Counter
     const messageTextarea = document.getElementById('message');
     const characterCounter = document.querySelector('.character-counter');
-    const maxLength = 160;
+    const maxLength = 512;
 
+
+
+    // Character counter functionality and limit
     messageTextarea.addEventListener('input', function() {
         const currentLength = this.value.length;
         characterCounter.textContent = `${currentLength}/${maxLength} characters`;
+        if (currentLength > maxLength) {
+            this.value = this.value.substring(0, maxLength);
+            characterCounter.textContent = `${maxLength}/${maxLength} characters`;
+            showNotification('Message exceeds maximum length!', 'error');
+        }
     });
 });
