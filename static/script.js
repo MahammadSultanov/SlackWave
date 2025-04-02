@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 channelCheckboxes.forEach(cb => cb.checked = false);
                 selectAllCheckbox.checked = false;
                 selectAllCheckbox.indeterminate = false;
+                fileUploadArea.querySelector('p').textContent = 'Drag and drop files here or';
+                characterCounter.textContent = `0/${maxLength} characters`;
             } else {
                 showNotification(result.message || 'Failed to send message', 'error');
             }
