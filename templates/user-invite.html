@@ -43,8 +43,8 @@
                         <label for="channelsToAdd">Select Channels</label>
                         <div class="channels-header">
                             <div class="select-all-wrapper">
-                                <input type="checkbox" id="selectAllChannels" class="channel-checkbox">
-                                <label for="selectAllChannels">Select All Channels</label>
+                                <input type="checkbox" id="selectAll" class="channel-checkbox">
+                                <label for="selectAll">Select All Channels</label>
                             </div>
                         </div>
                         <div id="channelsToAdd" class="channels-grid">
@@ -80,24 +80,5 @@
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Select all functionality for workspace invites
-            document.getElementById('selectAll').addEventListener('change', function() {
-                const checkboxes = document.querySelectorAll('#channels .channel-checkbox');
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = this.checked;
-                });
-            });
-            
-            // Select all functionality for adding to channels
-            document.getElementById('selectAllChannels').addEventListener('change', function() {
-                const checkboxes = document.querySelectorAll('#channelsToAdd .channel-checkbox');
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = this.checked;
-                });
-            });
-        });
-    </script>
 </body>
 </html>
