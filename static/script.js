@@ -1,4 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Login Form Submission
+    // Login form submission handling
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const errorMessage = document.getElementById('errorMessage');
+        
+        try {
+            const response = await fetch('{{ url_for("auth.login") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value
+                })
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                window.location.href = '{{ url_for("slack.index") }}';
+            } else {
+                errorMessage.textContent = data.message;
+                errorMessage.style.display = 'block';
+            }
+        } catch (error) {
+            errorMessage.textContent = 'An error occurred. Please try again.';
+            errorMessage.style.display = 'block';
+        }
+    });     
     // Channel selection handling
     const selectAllCheckbox = document.getElementById('selectAll');
     const channelCheckboxes = document.querySelectorAll('input[name="channels"]');
@@ -133,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const messageTextarea = document.getElementById('message');
     const characterCounter = document.querySelector('.character-counter');
     const maxLength = 512;
-
 
 
     // Character counter functionality and limit
