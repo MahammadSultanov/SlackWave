@@ -3,6 +3,7 @@ from utils.auth import get_user_data, save_user_data
 from werkzeug.security import check_password_hash, generate_password_hash
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+from utils.password_validator import validate_password
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -36,6 +37,11 @@ def signup():
     
     if not all([username, password, slack_token]):
         return jsonify({"message": "All fields are required"}), 400
+    
+    # Validate password
+    is_valid, error_message = validate_password(password)
+    if not is_valid:
+        return jsonify({"message": error_message}), 400
     
     # Check if username already exists
     if get_user_data(username):
