@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const errorMessage = document.getElementById('errorMessage');
-        
+        //  const { login, slackIndex } =  Routes;
         try {
-            const response = await fetch('{{ url_for("auth.login") }}', {
+            const response = await fetch(`/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             
             if (response.ok) {
-                window.location.href = '{{ url_for("slack.index") }}';
+                window.location.href = "/";
             } else {
                 errorMessage.textContent = data.message;
                 errorMessage.style.display = 'block';
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.style.display = 'block';
         }
     });
-
+    // Registration Form Submission
     // Channel selection handling
     const selectAllCheckbox = document.getElementById('selectAll');
     const channelCheckboxes = document.querySelectorAll('input[name="channels"]');
