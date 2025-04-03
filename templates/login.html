@@ -22,7 +22,10 @@
                 </div>
                 <div class="form-group-login">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" required>
+                        <button class="show-btn"type="button" id="togglePassword" onclick="togglePasswordVisibility('password', 'togglePassword')"><i class="fa-regular fa-eye"></i></button>
+                    </div>
                 </div>
                 <button type="submit" class="auth-btn">Sign In</button>
             </form>

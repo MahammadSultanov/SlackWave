@@ -1,5 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Login Form Submission
+    // Toggle password visibility
+    function togglePasswordVisibility(inputId, buttonId) {
+        const passwordInput = document.getElementById(inputId);
+        const toggleButton = document.getElementById(buttonId);
+            
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+    
+    // Add event listener for password toggle button
+    const togglePasswordButton = document.getElementById('togglePassword');
+    if (togglePasswordButton) {
+        togglePasswordButton.addEventListener('click', function() {
+            togglePasswordVisibility('password', 'togglePassword');
+        });
+    }
+    
     // Login form submission handling
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -29,7 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.textContent = 'An error occurred. Please try again.';
             errorMessage.style.display = 'block';
         }
-    });     
+    });
+
     // Channel selection handling
     const selectAllCheckbox = document.getElementById('selectAll');
     const channelCheckboxes = document.querySelectorAll('input[name="channels"]');

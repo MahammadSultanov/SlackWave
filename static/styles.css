@@ -128,7 +128,40 @@
     display: none;
 }
 
+.password-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
 
+.password-container input {
+    flex: 1;
+}
+
+.password-container button {
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.password-container button:hover {
+    background-color: #e1e1e1;
+}
+.show-btn{
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: color 0.3s;
+}
 /* Body style */
 body {
     font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
