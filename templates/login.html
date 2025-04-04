@@ -14,8 +14,8 @@
                 <i class="fa-brands fa-slack"></i>
                 <h1>Slack Wave</h1>
             </div>
-            <form id="loginForm" class="auth-form-login">
-                <div class="error-message" id="errorMessage"></div>
+            <form id="loginForm" class="auth-form-login" onsubmit="return handleLogin()">
+                <div class="error-message-login" id="errorMessage"></div>
                 <div class="form-group-login">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
@@ -34,6 +34,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='auth.js') }}"></script>
 </body>
 </html>
