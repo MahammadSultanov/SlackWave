@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="auth-page-singup">
-        <div class="auth-container-singup">
-            <div class="auth-logo-singup">
+    <div class="auth-page-signup">
+        <div class="auth-container-signup">
+            <div class="auth-logo-signup">
                 <i class="fa-brands fa-slack"></i>
                 <h1>Slack Wave</h1>
             </div>
@@ -18,28 +18,28 @@
                 <h3>About Slack User OAuth Token</h3>
                 <p>You'll need a Slack User OAuth Token to use this app. You can find this in your Slack App settings under "OAuth & Permissions". The token starts with 'xoxb-'.</p>
             </div>
-            <form id="signupForm" class="auth-form-singup">
-                <div class="error-message-singup" id="errorMessage"></div>
-                <div class="form-group-singup">
+            <form id="signupForm" class="auth-form-signup">
+                <div class="error-message-signup" id="errorMessage"></div>
+                <div class="form-group-signup">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
                 </div>
-                <div class="form-group-singup">
+                <div class="form-group-signup">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <div class="form-group-singup">
+                <div class="form-group-signup">
                     <label for="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" required>
                 </div>
-                <div class="form-group-singup">
+                <div class="form-group-signup">
                     <label for="slackToken">Slack User Token</label>
                     <input type="text" id="slackToken" name="slackToken" required placeholder="xoxb-...">
                     <small>Your Slack User OAuth Token</small>
                 </div>
-                <button type="submit" class="auth-btn-singup">Create Account</button>
+                <button type="submit" class="auth-btn-signup">Create Account</button>
             </form>
-            <div class="auth-links-singup">
+            <div class="auth-links-signup">
                 <p>Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
             </div>
         </div>
@@ -60,7 +60,7 @@
             }
             
             try {
-                const response = await fetch('{{ url_for("auth.signup") }}', {
+                const response = await fetch('/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -75,7 +75,7 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    window.location.href = '{{ url_for("slack.index") }}';
+                    window.location.href = '/';
                 } else {
                     errorMessage.textContent = data.message;
                     errorMessage.style.display = 'block';
@@ -86,5 +86,6 @@
             }
         });
     </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
