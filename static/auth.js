@@ -1,11 +1,12 @@
 // Toggle password visibility
-function togglePasswordVisibility(inputId, buttonId) {
+function togglePasswordVisibility(inputId, toggleButton) {
     const passwordInput = document.getElementById(inputId);
-    const toggleButton = document.getElementById(buttonId);
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
+        toggleButton.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
     } else {
         passwordInput.type = "password";
+        toggleButton.innerHTML = '<i class="fa-regular fa-eye"></i>';
     }
 }
 
@@ -84,5 +85,3 @@ if (signupForm) {
         });
     });
 }
-
-// No changes needed for login.html and signup.html as they are already updated correctly

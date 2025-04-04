@@ -26,12 +26,18 @@
                 </div>
                 <div class="form-group-signup">
                     <label for="password">Password</label>
-                    <input type="password" id="signupPassword" name="password" required>
+                    <div class="password-container">
+                        <input type="password" id="signupPassword" name="password" required>
+                        <button class="show-btn" type="button" id="togglePasswordSignup" onclick="togglePasswordVisibility('signupPassword', this)"><i class="fa-regular fa-eye"></i></button>
+                    </div>
                 </div>
                 <div class="form-group-signup">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="signupConfirmPassword" name="confirmPassword" required>
-                </div>
+                    <div class="password-container">
+                        <input type="password" id="signupConfirmPassword" name="confirmPassword" required>
+                        <button class="show-btn" type="button" id="toggleConfirmPassword" onclick="togglePasswordVisibility('signupConfirmPassword', this)"><i class="fa-regular fa-eye"></i></button>
+                    </div>
+                    </div>
                 <div class="form-group-signup">
                     <label for="slackToken">Slack User Token</label>
                     <input type="text" id="slackToken" name="slackToken" required placeholder="xoxb-...">
