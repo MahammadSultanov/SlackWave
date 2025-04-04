@@ -6,161 +6,11 @@
     <title>Sign Up - Slack Wave</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-    --primary-color: #4A154B;
-    --secondary-color: #9c209e;
-    --success-color: #2EB67D;
-    --error-color: #E01E5A;
-    --warning-color: #ECB22E;
-    --text-color: #1D1C1D;
-    --text-secondary: #616061;
-    --border-color: #ddd;
-    --bg-color: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --twitch: #611f69;
-}
-        .auth-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-secondary);
-            padding: 1rem;
-        }
-
-        .auth-container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .auth-logo {
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-        }
-
-        .auth-logo i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .auth-logo h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            color: var(--primary-color);
-        }
-
-        .auth-form {
-            text-align: left;
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--slack-blue);
-            box-shadow: 0 0 0 3px rgba(18, 100, 163, 0.1);
-        }
-
-        .form-group small {
-            display: block;
-            margin-top: 0.5rem;
-            color: #6b7280;
-            font-size: 0.875rem;
-        }
-
-        .auth-btn {
-            width: 100%;
-            padding: 0.875rem;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .auth-btn:hover {
-            background: var(--twitch);
-            transform: translateY(-1px);
-        }
-
-        .auth-links {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .auth-links a {
-            color: var(--slack-blue);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .auth-links a:hover {
-            text-decoration: underline;
-        }
-
-        .error-message {
-            background: #fef2f2;
-            color: var(--slack-red);
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .token-info {
-            background: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .token-info h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 0.875rem;
-            color: #374151;
-        }
-
-        .token-info p {
-            margin: 0;
-            font-size: 0.875rem;
-            color: #6b7280;
-            line-height: 1.4;
-        }
-    </style>
 </head>
 <body>
-    <div class="auth-page">
-        <div class="auth-container">
-            <div class="auth-logo">
+    <div class="auth-page-singup">
+        <div class="auth-container-singup">
+            <div class="auth-logo-singup">
                 <i class="fa-brands fa-slack"></i>
                 <h1>Slack Wave</h1>
             </div>
@@ -168,28 +18,28 @@
                 <h3>About Slack User OAuth Token</h3>
                 <p>You'll need a Slack User OAuth Token to use this app. You can find this in your Slack App settings under "OAuth & Permissions". The token starts with 'xoxb-'.</p>
             </div>
-            <form id="signupForm" class="auth-form">
-                <div class="error-message" id="errorMessage"></div>
-                <div class="form-group">
+            <form id="signupForm" class="auth-form-singup">
+                <div class="error-message-singup" id="errorMessage"></div>
+                <div class="form-group-singup">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group-singup">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group-singup">
                     <label for="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group-singup">
                     <label for="slackToken">Slack User Token</label>
                     <input type="text" id="slackToken" name="slackToken" required placeholder="xoxb-...">
                     <small>Your Slack User OAuth Token</small>
                 </div>
-                <button type="submit" class="auth-btn">Create Account</button>
+                <button type="submit" class="auth-btn-singup">Create Account</button>
             </form>
-            <div class="auth-links">
+            <div class="auth-links-singup">
                 <p>Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
             </div>
         </div>
