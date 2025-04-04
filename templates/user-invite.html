@@ -36,7 +36,17 @@
                     <div class="form-group">
                         <label for="channelEmail">Add people to channel</label>
                         <div class="message-input-container">
-                            <textarea id="channelEmail" name="email" required placeholder="Enter email address..."></textarea>
+                            <textarea id="channelEmail" name="email" placeholder="Enter email address..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="file-upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag and drop .xlsx files here or</p>
+                                <button type="button" class="upload-btn">
+                                <i></i> Attach File
+                                </button>
+                                <input type="file" id="fileInput" name="photo" hidden>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -79,6 +89,6 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='user-invite.js') }}"></script>
 </body>
 </html>
