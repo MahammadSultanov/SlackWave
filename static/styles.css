@@ -17,8 +17,8 @@
     padding: 0;
     box-sizing: border-box;
 }
-/* Login and Singup page*/
-.auth-page, .auth-page-singup {
+/* Login and Signup page*/
+.auth-page-login, .auth-page-signup {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -26,7 +26,7 @@
     background: var(--bg-secondary);
     padding: 1rem;
 }
-.auth-container, .auth-container-singup {
+.auth-container-login, .auth-container-signup {
     background: white;
     padding: 2.5rem;
     border-radius: 1rem;
@@ -36,36 +36,35 @@
     text-align: center;
 }
 
-.auth-logo, .auth-logo-singup {
+.auth-logo-login, .auth-logo-signup {
     margin-bottom: 2rem;
     color: var(--primary-color);
 }
  
-v 
-.auth-logo i, .auth-logo-singup i {
+.auth-logo-login i, .auth-logo-signup i {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.auth-logo h1, .auth-logo-singup h1 {
+.auth-logo-login h1, .auth-logo-signup h1 {
     font-size: 1.5rem;
     margin: 0;
     color: var(--primary-color);
 }
-.auth-form, .auth-form-singup {
+.auth-form-login, .auth-form-signup {
     text-align: left;
 }
-.form-group-login, .form-group-singup {
+.form-group-login, .form-group-signup {
     margin-bottom: 1.25rem;
 }
-.form-group-login label, .form-group-singup label {
+.form-group-login label, .form-group-signup label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--text-color);
     font-weight: 500;
 }
 
-.form-group-login input, .form-group-singup input {
+.form-group-login input, .form-group-signup input {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
@@ -74,12 +73,12 @@ v
     transition: all 0.2s ease;
 }
 
-.form-group-login input:focus, .form-group-singup input:focus {
+.form-group-login input:focus, .form-group-signup input:focus {
     outline: none;
     border-color: var(--secondary-color);
     box-shadow: 0 0 0 3px rgba(18, 100, 163, 0.1);
 }
-.auth-btn, .auth-btn-singup {
+.auth-btn-login, .auth-btn-signup {
     width: 100%;
     padding: 0.875rem;
     background: var(--primary-color);
@@ -92,31 +91,31 @@ v
     transition: all 0.2s ease;
 }
 
-.auth-btn:hover, .auth-btn-singup:hover {
+.auth-btn-login:hover, .auth-btn-signup:hover {
     background: #611f69;
     transform: translateY(-1px);
 }
 
-.auth-btn:disabled, .auth-btn-singup:disabled {
+.auth-btn-login:disabled, .auth-btn-signup:disabled {
     background: #ccc;
     cursor: not-allowed;
     transform: none;
 }
 
-.auth-links, .auth-links-singup {
+.auth-links-login, .auth-links-signup {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--border-color);
     text-align: center;
 }
 
-.auth-links a, .auth-links-singup a {
+.auth-links-login a, .auth-links-signup a {
     color: var(--secondary-color);
     text-decoration: none;
     font-weight: 500;
 }
 
-.auth-links a:hover, .auth-links-singup a:hover {
+.auth-links-login a:hover, .auth-links-signup a:hover {
     text-decoration: underline;
 }
 
@@ -129,8 +128,8 @@ v
     display: none;
 }
 
-/*Singup page*/
-.form-group-singup small {
+/*Signup page*/
+.form-group-signup small {
     display: block;
     margin-top: 0.5rem;
     color: #6b7280;
