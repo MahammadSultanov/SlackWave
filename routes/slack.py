@@ -3,6 +3,8 @@ from utils.slack_utils import get_slack_client, get_channels, upload_file_to_sla
 from slack_sdk.errors import SlackApiError
 import os
 import tempfile
+from utils.import_mails import process_excel_file
+import re
 
 slack_bp = Blueprint('slack', __name__)
 
@@ -87,7 +89,7 @@ def sms_sender():
     
     return jsonify({"success": True, "message": "Message and files sent successfully"})
 
-@slack_bp.route("/user-invite", methods=["GET"])
+@slack_bp.route("/user-invite", methods=["POST", "GET"])
 def user_invite():
     if 'username' not in session:
         return redirect(url_for('auth.login'))
@@ -176,3 +178,24 @@ def add_to_channel():
     except SlackApiError as e:
         error_message = f"Error finding user: {str(e)}"
         return jsonify({"success": False, "message": error_message})
+    
+@slack_bp.route("/read-excel", methods=['POST'])
+def read_excel():
+    if 'username' not in session:
+        return jsonify({"success": False, "message": "Not authenticated"}), 401
+    
+    client = get_slack_client(session)
+    
+    if not client:
+        return jsonify({"success": False, "message": "Not authenticated"}), 401
+    
+    if 'file' not in request.files:
+        return jsonify({
+            "success": False,
+            "message": "No file part in the request"
+        }), 400
+        
+    file = request.files['file']
+    result, status_code = process_excel_file(file)
+    
+    return jsonify(result), status_code
