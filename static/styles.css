@@ -344,7 +344,7 @@ body {
     border-radius: 6px;
 }
 
-.channel-item {
+.channel-item,.email-item {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -354,12 +354,12 @@ body {
     transition: all 0.3s;
 }
 
-.channel-item:hover {
+.channel-item:hover, .email-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.channel-checkbox {
+.channel-checkbox, .email-checkbox {
     width: 18px;
     height: 18px;
     cursor: pointer;
@@ -690,4 +690,40 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+/* Excel Preview Styles    */
+.email-items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.email-item {
+    padding: 8px 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.email-item:last-child {
+    border-bottom: none;
+}
+
+.email-item i {
+    color: var(--primary-color);
+    font-size: 12px;
+}
+
+.email-item:hover {
+    background-color: var(--bg-secondary);
+}
+.email-list-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px 0;
 }
