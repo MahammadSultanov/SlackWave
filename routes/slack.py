@@ -89,7 +89,7 @@ def sms_sender():
     
     return jsonify({"success": True, "message": "Message and files sent successfully"})
 
-@slack_bp.route("/user-invite", methods=["POST", "GET"])
+@slack_bp.route("/user-invite", methods=["GET"])
 def user_invite():
     if 'username' not in session:
         return redirect(url_for('auth.login'))
@@ -137,6 +137,7 @@ def add_to_channel():
     # Get form data
     email = request.form.get("email")
     selected_channels = request.form.getlist("channels")
+    table = request.form.get("table")
 
     if not email:
         return jsonify({"success": False, "message": "Please provide an email address"})
