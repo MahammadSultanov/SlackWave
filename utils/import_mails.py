@@ -8,15 +8,11 @@ import pandas as pd
 app = Flask(__name__, static_folder='.', static_url_path='')
 
 UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv'}
+ALLOWED_EXTENSIONS = {'xls', 'xlsx', 'csv'}
 
 # Create uploads directory if it doesn't exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# Check and install required dependencies
-required_packages = ['pandas', 'openpyxl', 'xlrd']
-
 
 def allowed_file(filename):
     return '.' in filename and \
