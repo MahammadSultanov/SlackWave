@@ -50,19 +50,18 @@
                             </div>
                         </div>
                         <div id="email-list" style="display: none;">
-                            <h3>Extracted Emails <span id="email-count"></span></h3>
-                            <div class="excel-info">
-                                <p>Filename: <span id="excel-filename"></span></p>
-                                <p>Rows: <span id="excel-rows"></span></p>
-                            </div>
                             <!-- Add the checkbox here in the HTML instead of via JavaScript -->
-                            <div class="select-all-wrapper">
+                            <div class="select-all-wrapper-emails">
                                 <input type="checkbox" id="selectAllEmailsCheckbox" class="email-checkbox">
                                 <label for="selectAllEmailsCheckbox">Select All Emails</label>
                             </div>
-                            <button type="button" id="selectEmailsBtn" class="btn btn-primary">
+                            <button type="button" id="selectEmailsBtn" class="btn-primary">
                                 <i class="fas fa-plus-circle"></i> Add Selected Emails
                             </button>
+                            <h3>Extracted Emails <span id="email-count"></span></h3>
+                            <div class="excel-info">
+                                <p>Filename: <span id="excel-filename"></span></p>
+                            </div>
                             <div class="email-list-container">
                                 <ul id="emails-container" class="email-items">
                                     <!-- Emails will be populated here by JavaScript -->
