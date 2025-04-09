@@ -243,45 +243,33 @@ document.addEventListener('DOMContentLoaded', function() {
         emailsContainer.innerHTML = listHTML;
         emailList.style.display = 'block';
         
-        // Add checkbox for selecting all emails
-        if (!document.getElementById('selectAllEmailsCheckbox')) {
-            const selectAllWrapper = document.createElement('div');
-            selectAllWrapper.className = 'select-all-wrapper';
-            selectAllWrapper.innerHTML = `
-                <input type="checkbox" id="selectAllEmailsCheckbox" class="email-checkbox">
-                <label for="selectAllEmailsCheckbox">Select All Emails</label>
-            `;
-            
-            emailList.insertBefore(selectAllWrapper, emailList.querySelector('.email-list-container'));
-            
-            const selectAllEmailsCheckbox = document.getElementById('selectAllEmailsCheckbox');
+        // Add event listeners for the checkboxes
+        const selectAllEmailsCheckbox = document.getElementById('selectAllEmailsCheckbox');
+        const emailCheckboxes = document.querySelectorAll('.email-checkbox:not(#selectAllEmailsCheckbox)');
+        
+        if (selectAllEmailsCheckbox) {
             selectAllEmailsCheckbox.addEventListener('change', function() {
-                const emailCheckboxes = document.querySelectorAll('.email-checkbox:not(#selectAllEmailsCheckbox)');
                 emailCheckboxes.forEach(checkbox => {
                     checkbox.checked = this.checked;
                 });
             });
-            
-            document.addEventListener('change', function(e) {
-                if (e.target.classList.contains('email-checkbox') && e.target.id !== 'selectAllEmailsCheckbox') {
-                    const emailCheckboxes = document.querySelectorAll('.email-checkbox:not(#selectAllEmailsCheckbox)');
-                    const allChecked = Array.from(emailCheckboxes).every(cb => cb.checked);
-                    const someChecked = Array.from(emailCheckboxes).some(cb => cb.checked);
+        }
+        
+        emailCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const allChecked = Array.from(emailCheckboxes).every(cb => cb.checked);
+                const someChecked = Array.from(emailCheckboxes).some(cb => cb.checked);
+                if (selectAllEmailsCheckbox) {
                     selectAllEmailsCheckbox.checked = allChecked;
                     selectAllEmailsCheckbox.indeterminate = someChecked && !allChecked;
                 }
             });
-            
-            const buttonContainer = document.createElement('div');
-            buttonContainer.className = 'email-buttons';
-            buttonContainer.innerHTML = `
-                <button type="button" id="selectEmailsBtn" class="btn btn-primary">
-                    <i class="fas fa-plus-circle"></i> Add Selected Emails
-                </button>
-            `;
-            emailList.insertBefore(buttonContainer, emailList.querySelector('.email-list-container'));
-            
-            document.getElementById('selectEmailsBtn').addEventListener('click', function() {
+        });
+        
+        // Add event listener to the button for adding selected emails
+        const selectEmailsBtn = document.getElementById('selectEmailsBtn');
+        if (selectEmailsBtn) {
+            selectEmailsBtn.addEventListener('click', function() {
                 const checkedEmails = Array.from(document.querySelectorAll('.email-checkbox:not(#selectAllEmailsCheckbox):checked'))
                     .map(checkbox => checkbox.value);
                     
