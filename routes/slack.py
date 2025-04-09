@@ -135,51 +135,75 @@ def add_to_channel():
         return jsonify({"success": False, "message": "Not authenticated"})
     
     # Get form data
-    email = request.form.get("email")
+    email_input = request.form.get("email", "")
     selected_channels = request.form.getlist("channels")
-    table = request.form.get("table")
-
-    if not email:
-        return jsonify({"success": False, "message": "Please provide an email address"})
+    
+    if not email_input:
+        return jsonify({"success": False, "message": "Please provide at least one email address"})
     
     if not selected_channels:
         return jsonify({"success": False, "message": "Please select at least one channel"})
-
-    # First, try to get the user ID from the email
-    try:
-        user_info = client.users_lookupByEmail(email=email)
-        user_id = user_info["user"]["id"]
-        
-        # Add user to each selected channel
-        success_channels = []
-        error_channels = []
-        
-        for channel_id in selected_channels:
-            try:
-                # Try to invite the user to the channel
-                result = client.conversations_invite(
-                    channel=channel_id,
-                    users=[user_id]
-                )
-                success_channels.append(channel_id)
-            except SlackApiError as e:
-                error_channels.append(f"Channel {channel_id}: {str(e)}")
-        
-        if error_channels:
-            return jsonify({
-                "success": True, 
-                "message": f"User added to {len(success_channels)} channels, with {len(error_channels)} errors: {', '.join(error_channels)}"
-            })
-        else:
-            return jsonify({
-                "success": True, 
-                "message": f"User successfully added to {len(success_channels)} channels"
-            })
-            
-    except SlackApiError as e:
-        error_message = f"Error finding user: {str(e)}"
-        return jsonify({"success": False, "message": error_message})
     
+    # Split the email input by common separators (newline, comma, semicolon)
+    emails = [e.strip() for e in re.split(r'[\n,;]+', email_input) if e.strip()]
+    
+    if not emails:
+        return jsonify({"success": False, "message": "Please provide valid email addresses"})
+    
+    # Process each email
+    success_count = 0
+    failed_emails = []
+    
+    for email in emails:
+        # Try to get the user ID from the email
+        try:
+            user_info = client.users_lookupByEmail(email=email)
+            user_id = user_info["user"]["id"]
+            
+            # Add user to each selected channel
+            channel_errors = []
+            channel_success = 0
+            
+            for channel_id in selected_channels:
+                try:
+                    # Try to invite the user to the channel
+                    result = client.conversations_invite(
+                        channel=channel_id,
+                        users=[user_id]
+                    )
+                    channel_success += 1
+                except SlackApiError as e:
+                    if "already_in_channel" in str(e):
+                        # Count this as a success if user is already in channel
+                        channel_success += 1
+                    else:
+                        channel_errors.append(f"{channel_id}: {str(e)}")
+            
+            if channel_success == len(selected_channels):
+                success_count += 1
+            else:
+                failed_emails.append(f"{email} (added to {channel_success}/{len(selected_channels)} channels)")
+                
+        except SlackApiError as e:
+            failed_emails.append(f"{email}: {str(e)}")
+    
+    # Prepare response message
+    if success_count == len(emails):
+        return jsonify({
+            "success": True, 
+            "message": f"Successfully added {success_count} users to {len(selected_channels)} channels"
+        })
+    elif success_count > 0:
+        return jsonify({
+            "success": True, 
+            "message": f"Added {success_count}/{len(emails)} users. Failed: {', '.join(failed_emails)}"
+        })
+    else:
+        return jsonify({
+            "success": False, 
+            "message": f"Failed to add any users. Errors: {', '.join(failed_emails)}"
+        })
+
 @slack_bp.route("/read-excel", methods=['POST'])
 def read_excel():
     if 'username' not in session:
