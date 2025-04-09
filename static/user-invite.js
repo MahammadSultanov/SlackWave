@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileInput = document.getElementById('fileInput');
     const uploadBtn = document.querySelector('.upload-btn');
     const excelFilename = document.getElementById('excel-filename');
-    const excelRows = document.getElementById('excel-rows');
 
     fileInput.addEventListener('change', function() {
         const fileName = this.files[0]?.name;
@@ -197,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to display Excel preview
     function displayExcelPreview(data) {
         excelFilename.textContent = data.filename;
-        excelRows.textContent = data.row_count;
         
         // Create table header
         let tableHTML = '<thead><tr>';
