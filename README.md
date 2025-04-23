@@ -13,14 +13,14 @@ pip install -r requirements.txt
 ```bash
 python3 app.py
 ```
-## After running
+## After Running
 
 - **The main page will open.**
 [Login](https://github.com/user-attachments/assets/60de4fda-d0af-41c6-a8e6-6036a28e33c8)
 - **Click "Creat an account."**
 [Sign up](https://github.com/user-attachments/assets/16d7c5ea-bb79-4788-8445-ccea00ddd1a3)
 - **You will need a Slack user token to register and use this tool.**
-## Slack token claim steps 
+## How to Obtain a Slack Token 
 - Go to [Slack Sign In ](https://slack.com/signin#/signin) aand log in or create your Slack workspace.
 - After logging in, visit [Slack API Apps](https://api.slack.com/apps) to create a new app. You will see a screen like this: [Create](https://github.com/user-attachments/assets/68263d71-9577-477b-bda0-cdc168a0b13d)
 - Choose From scratch: [Scratch](https://github.com/user-attachments/assets/1dd6b0af-5bfe-42f1-ae20-cff83784f18b)
