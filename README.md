@@ -53,3 +53,4 @@ users:read.email - View email addresses of people in a workspace
 ## Authors
 
 - [@mahammadsultanov](https://www.github.com/mahammadsultanov)
+- [@ruslanhamidov](https://www.github.com/ruslanhamidov)
